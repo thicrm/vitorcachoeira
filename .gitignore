@@ -3,6 +3,8 @@ node_modules/
 
 # Build output
 dist/
+!portfolio/dist/
+!portfolio/dist/**
 
 # Logs
 npm-debug.log*
