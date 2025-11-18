@@ -51,24 +51,35 @@ function App() {
 
   return (
     <div className={`app-shell ${activeVideo ? 'is-modal-open' : ''}`}>
-      <video
-        className="background-video"
-        src="https://pub-76ffd52f8d4541deba0aac1dbba56bf2.r2.dev/01_video_25.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-hidden="true"
-      />
-      <div className="app-shell__content">
-        <header className="hero">
+      <header className="header-section">
+        <video
+          className="header-section__background-video"
+          src="https://pub-76ffd52f8d4541deba0aac1dbba56bf2.r2.dev/01_video_25.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden="true"
+        />
+        <div className="header-section__content">
           <div className="hero__titles">
             <p className="hero__subtitle">multimidia artist, filmmaker</p>
             <h1 className="hero__heading">
               <span>VITOR CACHOEIRA</span>
             </h1>
+            <img 
+              src="/logo.png" 
+              alt="Vitor Cachoeira Logo" 
+              className="hero__logo"
+            />
           </div>
-          <nav className="hero__filters" aria-label="Filter video categories" role="tablist">
+        </div>
+      </header>
+
+      <section className="my-works-section">
+        <div className="my-works-section__content">
+          <h2 className="my-works-section__title">MY WORKS</h2>
+          <nav className="my-works-section__filters" aria-label="Filter video categories" role="tablist">
             {categories.map((category) => (
               <button
                 key={category}
@@ -81,11 +92,8 @@ function App() {
               </button>
             ))}
           </nav>
-        </header>
-
-        <main>
           <VideoGrid videos={filteredVideos} onSelectVideo={setActiveVideoId} />
-        </main>
+        </div>
 
         <footer className="footer">
           <div>
@@ -94,7 +102,7 @@ function App() {
           </div>
           <a href="mailto:hello@filmmaker.studio">hello@filmmaker.studio</a>
         </footer>
-      </div>
+      </section>
 
       {activeVideo ? (
         <div className="video-modal" role="dialog" aria-modal="true">
