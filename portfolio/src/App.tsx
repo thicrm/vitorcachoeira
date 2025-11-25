@@ -51,7 +51,7 @@ function App() {
 
   return (
     <div className={`app-shell ${activeVideo ? 'is-modal-open' : ''}`}>
-      <header className="header-section">
+      <header id="header" className="header-section">
         <video
           className="header-section__background-video"
           src="https://pub-76ffd52f8d4541deba0aac1dbba56bf2.r2.dev/01_video_25.mp4"
@@ -72,11 +72,33 @@ function App() {
               alt="Vitor Cachoeira Logo" 
               className="hero__logo"
             />
+            <nav className="hero__navigation">
+              <a 
+                href="#my-works" 
+                className="hero__nav-link"
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.getElementById('my-works')?.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                My Works
+              </a>
+              <a 
+                href="#about-me" 
+                className="hero__nav-link"
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.getElementById('about-me')?.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                About Me
+              </a>
+            </nav>
           </div>
         </div>
       </header>
 
-      <section className="my-works-section">
+      <section id="my-works" className="my-works-section">
         <div className="my-works-section__content">
           <h2 className="my-works-section__title">MY WORKS</h2>
           <nav className="my-works-section__filters" aria-label="Filter video categories" role="tablist">
@@ -94,13 +116,88 @@ function App() {
           </nav>
           <VideoGrid videos={filteredVideos} onSelectVideo={setActiveVideoId} />
         </div>
+      </section>
+
+      <section id="about-me" className="about-section">
+        <div className="about-section__content">
+          <div className="about-section__layout">
+            <div className="about-section__image">
+              {/* Image placeholder - replace with actual image */}
+              <div className="about-section__image-placeholder" />
+            </div>
+            <div className="about-section__text">
+              <h2 className="about-section__title">ABOUT ME</h2>
+              <div className="about-section__description">
+                <p>
+                  Vitor Cachoeira is a multimedia artist and filmmaker based in Berlin, working worldwide.
+                  His work explores the intersection of documentary storytelling, contemporary dance, and experimental visual narratives.
+                </p>
+                <p>
+                  Through travel films, performance pieces, and commercial projects, he creates immersive experiences
+                  that blend cinematic techniques with authentic human connections.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <footer className="footer">
           <div>
             <span>Available for commercial, documentary, and music projects.</span>
             <span>Based in Berlin • Working worldwide</span>
           </div>
+          <div className="footer__social">
+            <a 
+              href="https://instagram.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="footer__social-link"
+              aria-label="Instagram"
+            >
+              <i className="bi bi-instagram"></i>
+            </a>
+            <a 
+              href="https://vimeo.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="footer__social-link"
+              aria-label="Vimeo"
+            >
+              <i className="bi bi-vimeo"></i>
+            </a>
+            <a 
+              href="https://youtube.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="footer__social-link"
+              aria-label="YouTube"
+            >
+              <i className="bi bi-youtube"></i>
+            </a>
+            <a 
+              href="https://linkedin.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="footer__social-link"
+              aria-label="LinkedIn"
+            >
+              <i className="bi bi-linkedin"></i>
+            </a>
+          </div>
           <a href="mailto:hello@filmmaker.studio">hello@filmmaker.studio</a>
+          <button
+            type="button"
+            className="footer__logo"
+            onClick={() => {
+              document.getElementById('header')?.scrollIntoView({ behavior: 'smooth' })
+            }}
+            aria-label="Return to top"
+          >
+            <img 
+              src="/fonts/arquivos_site_cachoeira/favicon_1.png" 
+              alt="Vitor Cachoeira Logo" 
+            />
+          </button>
         </footer>
       </section>
 
