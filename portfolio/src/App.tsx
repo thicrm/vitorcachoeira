@@ -52,26 +52,12 @@ function App() {
   return (
     <div className={`app-shell ${activeVideo ? 'is-modal-open' : ''}`}>
       <header id="header" className="header-section">
-        <video
-          className="header-section__background-video"
-          src="https://pub-76ffd52f8d4541deba0aac1dbba56bf2.r2.dev/01_video_25.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          aria-hidden="true"
-        />
         <div className="header-section__content">
           <div className="hero__titles">
             <p className="hero__subtitle">multimidia artist, filmmaker</p>
             <h1 className="hero__heading">
               <span>VITOR CACHOEIRA</span>
             </h1>
-            <img 
-              src="/logo.png" 
-              alt="Vitor Cachoeira Logo" 
-              className="hero__logo"
-            />
             <nav className="hero__navigation">
               <a 
                 href="#my-works" 
