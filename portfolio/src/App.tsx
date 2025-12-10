@@ -1,32 +1,26 @@
 import './App.css'
 import { useEffect, useMemo, useState } from 'react'
 import { VideoGrid } from './components/VideoGrid.tsx'
-import { videos } from './data/videos.ts'
+import { videos, type VideoRole } from './data/videos.ts'
 
-const FILTER_ORDER = ['All', 'Travel Film', 'Documentary', 'Commercial', 'Performance', 'Experimental']
-
-const FILTER_LABELS: Record<string, string> = {
-  All: 'All Projects',
-  'Travel Film': 'Travel Films',
-  Documentary: 'Documentaries',
-  Commercial: 'Commercial Work',
-  Performance: 'Performance Pieces',
-  Experimental: 'Experimental Films',
-}
+const ROLE_ORDER: VideoRole[] = ['DIRECTOR', 'CINEMATOGRAPHER', 'EDITOR', 'COLORIST', 'SOUNDTRACK']
 
 function App() {
-  const categories = useMemo<string[]>(() => {
-    const uniqueCategories = Array.from(new Set(videos.map((video) => video.category)))
-    const ordered = uniqueCategories.sort((a, b) => FILTER_ORDER.indexOf(a) - FILTER_ORDER.indexOf(b))
-    return ['All', ...ordered]
+  const allRoles = useMemo<VideoRole[]>(() => {
+    const roleSet = new Set<VideoRole>()
+    videos.forEach((video) => {
+      video.roles.forEach((role) => roleSet.add(role))
+    })
+    return ROLE_ORDER.filter((role) => roleSet.has(role))
   }, [])
-  const [activeCategory, setActiveCategory] = useState<string>(categories[0])
+  
+  const [activeRole, setActiveRole] = useState<VideoRole | 'All'>('All')
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null)
 
   const filteredVideos = useMemo(() => {
-    if (activeCategory === 'All') return videos
-    return videos.filter((video) => video.category === activeCategory)
-  }, [activeCategory])
+    if (activeRole === 'All') return videos
+    return videos.filter((video) => video.roles.includes(activeRole))
+  }, [activeRole])
 
   const activeVideo = activeVideoId
     ? videos.find((video) => video.id === activeVideoId) ?? null
@@ -53,10 +47,25 @@ function App() {
     <div className={`app-shell ${activeVideo ? 'is-modal-open' : ''}`}>
       <header id="header" className="header-section">
         <div className="header-section__content">
+          <button
+            type="button"
+            className="header__logo"
+            onClick={() => {
+              document.getElementById('header')?.scrollIntoView({ behavior: 'smooth' })
+            }}
+            aria-label="Scroll to top"
+          >
+            <img 
+              src="/fonts/arquivos_site_cachoeira/favicon_1.png" 
+              alt="Vitor Cachoeira Logo" 
+            />
+          </button>
           <div className="hero__titles">
             <p className="hero__subtitle">multimidia artist, filmmaker</p>
             <h1 className="hero__heading">
-              <span>VITOR CACHOEIRA</span>
+              <span className="hero__heading-line1">VITOR</span>
+              <span className="hero__heading-line2">CACHOEIRA</span>
+              <span className="hero__heading-blink">_</span>
             </h1>
             <nav className="hero__navigation">
               <a 
@@ -87,16 +96,24 @@ function App() {
       <section id="my-works" className="my-works-section">
         <div className="my-works-section__content">
           <h2 className="my-works-section__title">MY WORKS</h2>
-          <nav className="my-works-section__filters" aria-label="Filter video categories" role="tablist">
-            {categories.map((category) => (
+          <nav className="my-works-section__filters" aria-label="Filter by role" role="tablist">
+            <button
+              className={activeRole === 'All' ? 'is-active' : ''}
+              onClick={() => setActiveRole('All')}
+              role="tab"
+              aria-selected={activeRole === 'All'}
+            >
+              <span>All</span>
+            </button>
+            {allRoles.map((role) => (
               <button
-                key={category}
-                className={category === activeCategory ? 'is-active' : ''}
-                onClick={() => setActiveCategory(category)}
+                key={role}
+                className={activeRole === role ? 'is-active' : ''}
+                onClick={() => setActiveRole(role)}
                 role="tab"
-                aria-selected={category === activeCategory}
+                aria-selected={activeRole === role}
               >
-                <span>{FILTER_LABELS[category] ?? category}</span>
+                <span>{role}</span>
               </button>
             ))}
           </nav>

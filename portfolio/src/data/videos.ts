@@ -1,70 +1,52 @@
 export type VideoPlatform = 'youtube' | 'vimeo'
 
+export type VideoRole = 'DIRECTOR' | 'CINEMATOGRAPHER' | 'EDITOR' | 'COLORIST' | 'SOUNDTRACK'
+
 export type VideoMeta = {
   id: string
   title: string
   platform: VideoPlatform
   videoId: string
-  category: string
   year: string
-  description: string
+  roles: VideoRole[]
   embedUrl: string
 }
 
 export const videos: VideoMeta[] = [
   {
-    id: 'resonance-journey',
-    title: 'Resonance Journey',
+    id: 'laroye',
+    title: 'LAROYÊ',
     platform: 'youtube',
-    videoId: '8REf7Q46Izc',
-    category: 'Travel Film',
-    year: '2024',
-    description:
-      'Immersive travelogue blending documentary textures with contemporary dance in motion.',
+    videoId: 'eEfurQ9uYYE', // YouTube title: "LAROYÊ, 2021"
+    year: '2021',
+    roles: ['DIRECTOR', 'EDITOR', 'COLORIST', 'SOUNDTRACK'], // Matches: DIRECTOR, EDITOR, COLORIST, SOUNDTRACK
+    embedUrl: 'https://www.youtube.com/embed/eEfurQ9uYYE?rel=0&modestbranding=1&playsinline=1',
+  },
+  {
+    id: 'thalassa',
+    title: 'THALASSA',
+    platform: 'youtube',
+    videoId: '8REf7Q46Izc', // YouTube title: "THALASSA - FASHION FILM"
+    year: '2022',
+    roles: ['DIRECTOR', 'CINEMATOGRAPHER', 'EDITOR', 'COLORIST'], // Matches: DIRECTOR, CINEMATOGRAPHER, EDITOR, COLORIST
     embedUrl: 'https://www.youtube.com/embed/8REf7Q46Izc?rel=0&modestbranding=1&playsinline=1',
   },
   {
-    id: 'urban-passage',
-    title: 'Urban Passage',
+    id: 'vereda',
+    title: 'VEREDA',
     platform: 'youtube',
-    videoId: 'qjkQSOkTM5U',
-    category: 'Experimental',
+    videoId: 'ScTLp-7Nak8', // YouTube title: "VEREDA - SHORT FILM"
     year: '2023',
-    description:
-      'Street-level portrait capturing raw energy, spoken word, and layered city rhythms.',
-    embedUrl: 'https://www.youtube.com/embed/qjkQSOkTM5U?rel=0&modestbranding=1&playsinline=1',
-  },
-  {
-    id: 'refraction',
-    title: 'Refraction',
-    platform: 'youtube',
-    videoId: 'wi5Mmo_89fE',
-    category: 'Commercial',
-    year: '2024',
-    description:
-      'Cinematic brand vignette focused on motion, light leaks, and tactile storytelling.',
-    embedUrl: 'https://www.youtube.com/embed/wi5Mmo_89fE?rel=0&modestbranding=1&playsinline=1',
-  },
-  {
-    id: 'gravity-echo',
-    title: 'Gravity Echo',
-    platform: 'youtube',
-    videoId: 'ScTLp-7Nak8',
-    category: 'Performance',
-    year: '2022',
-    description:
-      'Minimalist stage piece studying bodies in flight and the tension between stillness and speed.',
+    roles: ['DIRECTOR', 'CINEMATOGRAPHER', 'EDITOR', 'COLORIST'], // Matches: DIRECTOR, CINEMATOGRAPHER, EDITOR, COLORIST
     embedUrl: 'https://www.youtube.com/embed/ScTLp-7Nak8?rel=0&modestbranding=1&playsinline=1',
   },
   {
-    id: 'fluidity',
-    title: 'Fluidity',
-    platform: 'vimeo',
-    videoId: '998466285',
-    category: 'Art Film',
+    id: 'kabeca-cheia-sentimentos-selvagens',
+    title: 'KABEÇA CHEIA SENTIMENTOS SELVAGENS',
+    platform: 'youtube',
+    videoId: 'wi5Mmo_89fE', // YouTube title: "Kabeça Cheia - Pensadimais (Clipe Oficial)"
     year: '2024',
-    description:
-      'Experimental short exploring water, memory, and analog distortion across layered visuals.',
-    embedUrl: 'https://player.vimeo.com/video/998466285?title=0&byline=0&portrait=0',
+    roles: ['CINEMATOGRAPHER', 'EDITOR', 'COLORIST'], // Matches: CINEMATOGRAPHER, EDITOR, COLORIST
+    embedUrl: 'https://www.youtube.com/embed/wi5Mmo_89fE?rel=0&modestbranding=1&playsinline=1',
   },
 ]
