@@ -63,8 +63,8 @@ function App() {
           <div className="hero__titles">
             <p className="hero__subtitle">multimidia artist, filmmaker</p>
             <h1 className="hero__heading">
-              <span className="hero__heading-line1">VITOR</span>
-              <span className="hero__heading-line2">CACHOEIRA</span>
+              <span className="hero__heading-line1">Vitor</span>
+              <span className="hero__heading-line2">Cachoeira</span>
               <span className="hero__heading-blink">_</span>
             </h1>
             <nav className="hero__navigation">

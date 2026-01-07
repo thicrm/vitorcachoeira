@@ -1,4 +1,4 @@
-import { useMemo, useRef, useEffect } from 'react'
+import { useMemo } from 'react'
 import type { VideoMeta } from '../data/videos.ts'
 
 type VideoCardProps = {
@@ -12,45 +12,25 @@ const platformThumbnail = {
 }
 
 export const VideoCard = ({ video, onSelect }: VideoCardProps) => {
-  const cardRef = useRef<HTMLElement>(null)
   const thumbnail = useMemo(
     () => platformThumbnail[video.platform](video.videoId),
     [video.platform, video.videoId]
   )
 
-  useEffect(() => {
-    if (cardRef.current) {
-      const updatePosition = () => {
-        const rect = cardRef.current?.getBoundingClientRect()
-        if (rect) {
-          cardRef.current?.style.setProperty('--card-top', `${rect.top}px`)
-          cardRef.current?.style.setProperty('--card-height', `${rect.height}px`)
-        }
-      }
-      updatePosition()
-      window.addEventListener('scroll', updatePosition)
-      window.addEventListener('resize', updatePosition)
-      return () => {
-        window.removeEventListener('scroll', updatePosition)
-        window.removeEventListener('resize', updatePosition)
-      }
-    }
-  }, [])
-
   return (
-    <article ref={cardRef} className="video-card">
-      <button
-        type="button"
+    <article className="video-card">
+    <button
+      type="button"
         className="video-card__thumbnail-button"
-        onClick={() => onSelect(video.id)}
-        aria-label={`Open video ${video.title}`}
-      >
-        <span
-          className="video-card__media"
-          style={{ backgroundImage: `url(${thumbnail})` }}
-        />
-        <span aria-hidden="true" className="video-card__scanline" />
-      </button>
+      onClick={() => onSelect(video.id)}
+      aria-label={`Open video ${video.title}`}
+    >
+      <span
+        className="video-card__media"
+      	style={{ backgroundImage: `url(${thumbnail})` }}
+      />
+      <span aria-hidden="true" className="video-card__scanline" />
+    </button>
       <div className="video-card__info">
         <h3 className="video-card__title">{video.title}</h3>
         <div className="video-card__meta">
