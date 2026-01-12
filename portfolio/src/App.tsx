@@ -1,6 +1,7 @@
 import './App.css'
 import { useEffect, useMemo, useState } from 'react'
 import { VideoGrid } from './components/VideoGrid.tsx'
+import { DitherBackground } from './components/DitherBackground.tsx'
 import { videos, type VideoRole } from './data/videos.ts'
 
 const ROLE_ORDER: VideoRole[] = ['DIRECTOR', 'CINEMATOGRAPHER', 'EDITOR', 'COLORIST', 'SOUNDTRACK']
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <div className={`app-shell ${activeVideo ? 'is-modal-open' : ''}`}>
+      <DitherBackground />
       <header id="header" className="header-section">
         <div className="header-section__content">
           <button
