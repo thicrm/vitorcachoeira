@@ -39,7 +39,16 @@
 }
 
 .app-shell::before {
-  display: none;
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  pointer-events: none;
+  display: block;
 }
 
 .hero {
@@ -176,9 +185,9 @@
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   cursor: pointer;
-  transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1),
-    text-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 260ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 300ms ease,
+    text-shadow 300ms ease,
+    color 300ms ease;
   text-shadow:
     0 0 8px rgba(255, 255, 255, 0.35),
     0 0 16px rgba(255, 255, 255, 0.25),
@@ -291,6 +300,7 @@
   transform: scale(1);
   transition: transform 220ms ease, box-shadow 220ms ease;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 @media (max-width: 768px) {
@@ -362,6 +372,7 @@
   transition: opacity 220ms ease;
   pointer-events: none;
   z-index: 1;
+  border-radius: 5px;
 }
 
 .video-card__media {
@@ -372,6 +383,7 @@
   background-position: center;
   filter: brightness(0.85);
   transition: filter 300ms ease;
+  border-radius: 5px;
 }
 
 .video-card:hover .video-card__media {
@@ -385,6 +397,7 @@
   background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15), transparent 55%);
   opacity: 0.2;
   transition: opacity 200ms ease;
+  border-radius: 5px;
 }
 
 .video-card__thumbnail-button:hover .video-card__media::after,
@@ -418,6 +431,7 @@
   opacity: 0.12;
   animation: scanline 7s linear infinite;
   pointer-events: none;
+  border-radius: 5px;
 }
 
 .video-card__thumbnail-button:hover .video-card__scanline,
@@ -886,6 +900,12 @@
   align-items: start;
   flex: 1;
   min-height: 0;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  transform: scale(1);
+}
+
+.about-section__layout:hover {
+  transform: scale(1.02);
 }
 
 .about-section__image {
@@ -894,6 +914,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   transform: translateY(-40px);
+  transition: filter 300ms ease;
 }
 
 .about-section__image-placeholder {
@@ -901,8 +922,14 @@
   max-width: 350px;
   aspect-ratio: 4 / 5;
   background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
+  filter: brightness(1);
+  transition: filter 300ms ease, box-shadow 220ms ease;
+}
+
+.about-section__layout:hover .about-section__image-placeholder {
+  filter: brightness(1.2);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 
 .about-section__image img {
@@ -910,6 +937,13 @@
   height: auto;
   object-fit: cover;
   border-radius: 4px;
+  filter: brightness(1);
+  transition: filter 300ms ease, box-shadow 220ms ease;
+}
+
+.about-section__layout:hover .about-section__image img {
+  filter: brightness(1.2);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 
 .about-section__text {
@@ -924,23 +958,12 @@
   letter-spacing: 0.14rem;
   text-transform: uppercase;
   color: #ffffff;
-  cursor: pointer;
   transform-origin: center;
-  transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1),
-    text-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: text-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1);
   text-shadow:
     0 0 8px rgba(255, 255, 255, 0.2),
     0 0 16px rgba(255, 255, 255, 0.15),
     0 0 24px rgba(255, 255, 255, 0.1);
-}
-
-.about-section__title:hover,
-.about-section__title:focus-visible {
-  transform: scale(1.08);
-  text-shadow:
-    0 0 16px rgba(255, 255, 255, 0.4),
-    0 0 30px rgba(255, 255, 255, 0.3),
-    0 0 48px rgba(255, 255, 255, 0.2);
 }
 
 .about-section__description {
@@ -1007,10 +1030,10 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 260ms cubic-bezier(0.4, 0, 0.2, 1),
-    filter 260ms cubic-bezier(0.4, 0, 0.2, 1),
-    text-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 300ms ease,
+    color 300ms ease,
+    filter 300ms ease,
+    text-shadow 300ms ease;
   transform-origin: center;
   cursor: pointer;
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35))
