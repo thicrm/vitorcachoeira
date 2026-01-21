@@ -544,13 +544,39 @@
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 0.9rem;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 300ms ease;
+}
+
+.footer > div {
+  transition: color 300ms ease;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer > div span {
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 300ms ease;
+}
+
+.footer > div:hover {
+  color: #ffffff;
+}
+
+.footer > div:hover span {
+  color: #ffffff;
 }
 
 .footer a {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
   text-transform: uppercase;
   letter-spacing: 0.2em;
+  transition: color 300ms ease;
+}
+
+.footer a:hover,
+.footer a:active,
+.footer a:focus {
+  color: #ffffff;
 }
 
 @keyframes scanline {
@@ -982,7 +1008,7 @@
 
 .about-section .footer {
   border-top: none;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.9);
   padding-top: 3rem;
   margin-top: auto;
   flex-shrink: 0;
@@ -1003,10 +1029,31 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.about-section .footer > div span {
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 300ms ease;
 }
 
 .about-section .footer a {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 300ms ease;
+}
+
+.about-section .footer a:hover,
+.about-section .footer a:active,
+.about-section .footer a:focus {
+  color: #ffffff;
+}
+
+.about-section .footer > div:hover {
+  color: #ffffff;
+}
+
+.about-section .footer > div:hover span {
+  color: #ffffff;
 }
 
 .footer__social {

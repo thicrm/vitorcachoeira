@@ -149,11 +149,11 @@ function App() {
         <footer className="footer">
           <div>
             <span>Available for commercial, documentary, and music projects.</span>
-            <span>Based in Berlin • Working worldwide</span>
+            <span>Based in São Paulo • Working worldwide</span>
           </div>
           <div className="footer__social">
             <a 
-              href="https://instagram.com" 
+              href="https://www.instagram.com/vitor.cachoeira/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="footer__social-link"
@@ -162,7 +162,7 @@ function App() {
               <i className="bi bi-instagram"></i>
             </a>
             <a 
-              href="https://vimeo.com" 
+              href="https://vimeo.com/user113932858" 
               target="_blank" 
               rel="noopener noreferrer"
               className="footer__social-link"
@@ -171,7 +171,7 @@ function App() {
               <i className="bi bi-vimeo"></i>
             </a>
             <a 
-              href="https://youtube.com" 
+              href="https://www.youtube.com/@vitorcachoeira22" 
               target="_blank" 
               rel="noopener noreferrer"
               className="footer__social-link"
@@ -179,17 +179,8 @@ function App() {
             >
               <i className="bi bi-youtube"></i>
             </a>
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="footer__social-link"
-              aria-label="LinkedIn"
-            >
-              <i className="bi bi-linkedin"></i>
-            </a>
           </div>
-          <a href="mailto:hello@filmmaker.studio">hello@filmmaker.studio</a>
+          <a href="mailto:vitorcacchoeira@gmail.com">vitorcacchoeira@gmail.com</a>
           <button
             type="button"
             className="footer__logo"
