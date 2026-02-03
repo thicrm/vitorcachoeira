@@ -186,12 +186,7 @@
   text-decoration: none;
   cursor: pointer;
   transition: transform 300ms ease,
-    text-shadow 300ms ease,
     color 300ms ease;
-  text-shadow:
-    0 0 8px rgba(255, 255, 255, 0.35),
-    0 0 16px rgba(255, 255, 255, 0.25),
-    0 0 24px rgba(255, 255, 255, 0.15);
   transform-origin: left;
 }
 
@@ -199,11 +194,6 @@
 .hero__nav-link:focus-visible {
   transform: scale(1.15);
   color: rgba(255, 255, 255, 0.95);
-  text-shadow:
-    0 0 16px rgba(255, 255, 255, 0.75),
-    0 0 30px rgba(255, 255, 255, 0.55),
-    0 0 48px rgba(255, 255, 255, 0.35),
-    0 0 64px rgba(255, 255, 255, 0.25);
 }
 
 .hero__description {
@@ -799,7 +789,7 @@
 
 /* My Works Section */
 .my-works-section {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.8);
   width: 100%;
   min-height: 100vh;
   padding: clamp(3rem, 6vw, 4.5rem) 0;
@@ -809,6 +799,20 @@
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+.my-works-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .my-works-section__content {
@@ -821,6 +825,7 @@
   min-height: 0;
   padding: 0;
   position: relative;
+  z-index: 1;
 }
 
 .my-works-section {
