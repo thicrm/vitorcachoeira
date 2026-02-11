@@ -184,6 +184,12 @@ function init(){
 resize();
 addEventListener('resize',resize);
 addEventListener('mousemove',e=>{tmx=e.clientX/w;tmy=e.clientY/h;});
+addEventListener('message',e=>{
+if(e.data&&e.data.type==='mousemove'&&e.data.windowWidth&&e.data.windowHeight){
+tmx=e.data.clientX/e.data.windowWidth;
+tmy=e.data.clientY/e.data.windowHeight;
+}
+});
 
 const vs=gl.createShader(gl.VERTEX_SHADER);
 gl.shaderSource(vs,VS);gl.compileShader(vs);
