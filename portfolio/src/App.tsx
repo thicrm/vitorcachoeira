@@ -137,12 +137,13 @@ function App() {
               <h2 className="about-section__title">ABOUT ME</h2>
               <div className="about-section__description">
                 <p>
-                  Vitor Cachoeira is a multimedia artist and filmmaker based in Berlin, working worldwide.
-                  His work explores the intersection of documentary storytelling, contemporary dance, and experimental visual narratives.
+                  Vitor Cachoeira is a 25-year-old multimedia artist and filmmaker based in São Paulo, Brazil. A versatile generalist, he has built experience across a wide range of audiovisual fields, from filmmaking and music videos to live broadcast operations, working with switchers and live production workflows for major companies including YouTube, Paramount+, and Prime Video at CazeTV/Livemode.
                 </p>
                 <p>
-                  Through travel films, performance pieces, and commercial projects, he creates immersive experiences
-                  that blend cinematic techniques with authentic human connections.
+                  In cinema, Vitor works across multiple roles, with experience in directing, cinematography, editing, and color grading. His films have been featured at notable festivals such as Kinoforum, Sinédoque, Festival de Arapiraca, and Metro - Festival de Cinema Universitário, among others.
+                </p>
+                <p>
+                  Currently, he also works at the intersection of music and visual arts, creating imagery and projections for projects like Kabeça Cheia and Monch Monch, while collaborating with friends on initiatives such as Sagrados Anônimos.
                 </p>
               </div>
             </div>
