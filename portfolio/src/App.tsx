@@ -127,8 +127,11 @@ function App() {
         <div className="about-section__content">
           <div className="about-section__layout">
             <div className="about-section__image">
-              {/* Image placeholder - replace with actual image */}
-              <div className="about-section__image-placeholder" />
+              <img 
+                src="https://pub-76ffd52f8d4541deba0aac1dbba56bf2.r2.dev/2fofo-nova_insta.jpg.jpeg" 
+                alt="Vitor Cachoeira" 
+                className="about-section__image-img"
+              />
             </div>
             <div className="about-section__text">
               <h2 className="about-section__title">ABOUT ME</h2>
