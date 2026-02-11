@@ -928,7 +928,7 @@
   display: grid;
   grid-template-columns: 0.6fr 1fr;
   gap: clamp(2rem, 5vw, 4rem);
-  align-items: start;
+  align-items: center;
   flex: 1;
   min-height: 0;
   transition: transform 300ms ease, box-shadow 300ms ease;
@@ -942,7 +942,7 @@
 .about-section__image {
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   transition: filter 300ms ease;
 }
