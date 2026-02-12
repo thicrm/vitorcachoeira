@@ -3,7 +3,8 @@
 
 import type { VideoMeta } from '../data/videos'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
+// API_BASE_URL will be used when backend is integrated
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
 
 // Authentication
 export const login = async (password: string): Promise<boolean> => {
