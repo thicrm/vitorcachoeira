@@ -1092,6 +1092,12 @@
 .footer__social-link i {
   display: inline-block;
   line-height: 1;
+  transition: transform 300ms ease,
+    color 300ms ease,
+    filter 300ms ease,
+    text-shadow 300ms ease;
+  transform-origin: center;
+  will-change: transform, filter, text-shadow;
 }
 
 .footer__social-link:hover,
