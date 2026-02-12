@@ -10,6 +10,7 @@ export type VideoMeta = {
   year: string
   roles: VideoRole[]
   embedUrl: string
+  thumbnailUrl?: string // Optional custom thumbnail URL
 }
 
 export const videos: VideoMeta[] = [

@@ -13,8 +13,14 @@ const platformThumbnail = {
 
 export const VideoCard = ({ video, onSelect }: VideoCardProps) => {
   const thumbnail = useMemo(
-    () => platformThumbnail[video.platform](video.videoId),
-    [video.platform, video.videoId]
+    () => {
+      // Use custom thumbnail if provided, otherwise use platform default
+      if (video.thumbnailUrl) {
+        return video.thumbnailUrl
+      }
+      return platformThumbnail[video.platform](video.videoId)
+    },
+    [video.platform, video.videoId, video.thumbnailUrl]
   )
 
   return (

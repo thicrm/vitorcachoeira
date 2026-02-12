@@ -7,6 +7,8 @@ import { videos, type VideoRole } from './data/videos.ts'
 const ROLE_ORDER: VideoRole[] = ['DIRECTOR', 'CINEMATOGRAPHER', 'EDITOR', 'COLORIST', 'SOUNDTRACK']
 
 function App() {
+  const aboutMeImage = 'https://pub-76ffd52f8d4541deba0aac1dbba56bf2.r2.dev/2fofo-nova_insta.jpg.jpeg'
+
   const allRoles = useMemo<VideoRole[]>(() => {
     const roleSet = new Set<VideoRole>()
     videos.forEach((video) => {
@@ -128,7 +130,7 @@ function App() {
           <div className="about-section__layout">
             <div className="about-section__image">
               <img 
-                src="https://pub-76ffd52f8d4541deba0aac1dbba56bf2.r2.dev/2fofo-nova_insta.jpg.jpeg" 
+                src={aboutMeImage} 
                 alt="Vitor Cachoeira" 
                 className="about-section__image-img"
               />
