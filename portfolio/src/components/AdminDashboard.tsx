@@ -7,12 +7,15 @@ import {
   addProject, 
   deleteProject,
   getAboutMeImage,
-  updateAboutMeImage
+  updateAboutMeImage,
+  getRoles,
+  addRole,
+  deleteRole
 } from '../services/api'
 import type { VideoMeta, VideoPlatform, VideoRole } from '../data/videos'
 import './AdminDashboard.css'
 
-const ROLE_ORDER: VideoRole[] = ['DIRECTOR', 'CINEMATOGRAPHER', 'EDITOR', 'COLORIST', 'SOUNDTRACK']
+// ROLE_ORDER is now managed dynamically through the admin panel
 
 type NavigateFunction = (path: string) => void
 
@@ -22,6 +25,8 @@ export function AdminDashboard({ navigate }: { navigate?: NavigateFunction }) {
   })
   const [projects, setProjects] = useState<VideoMeta[]>([])
   const [aboutMeImage, setAboutMeImage] = useState('')
+  const [roles, setRoles] = useState<string[]>([])
+  const [newRoleName, setNewRoleName] = useState('')
   const [loading, setLoading] = useState(true)
   const [editingProject, setEditingProject] = useState<VideoMeta | null>(null)
   const [showAddForm, setShowAddForm] = useState(false)
@@ -37,12 +42,14 @@ export function AdminDashboard({ navigate }: { navigate?: NavigateFunction }) {
 
   const loadData = async () => {
     try {
-      const [projectsData, imageData] = await Promise.all([
+      const [projectsData, imageData, rolesData] = await Promise.all([
         getProjects(),
-        getAboutMeImage()
+        getAboutMeImage(),
+        getRoles()
       ])
       setProjects(projectsData)
       setAboutMeImage(imageData)
+      setRoles(rolesData)
     } catch (error) {
       console.error('Failed to load data:', error)
     } finally {
@@ -115,6 +122,44 @@ export function AdminDashboard({ navigate }: { navigate?: NavigateFunction }) {
     }
   }
 
+  const handleAddRole = async () => {
+    if (!newRoleName.trim()) {
+      alert('Please enter a role name')
+      return
+    }
+    
+    setSaving(true)
+    try {
+      await addRole(newRoleName)
+      setNewRoleName('')
+      await loadData()
+      alert('Role added successfully!')
+    } catch (error: any) {
+      console.error('Failed to add role:', error)
+      alert(error.message || 'Failed to add role')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const handleDeleteRole = async (role: string) => {
+    if (!confirm(`Are you sure you want to delete the role "${role}"? This will not remove it from existing projects.`)) {
+      return
+    }
+    
+    setSaving(true)
+    try {
+      await deleteRole(role)
+      await loadData()
+      alert('Role deleted successfully!')
+    } catch (error: any) {
+      console.error('Failed to delete role:', error)
+      alert(error.message || 'Failed to delete role')
+    } finally {
+      setSaving(false)
+    }
+  }
+
   const generateEmbedUrl = (platform: VideoPlatform, videoId: string): string => {
     if (platform === 'youtube') {
       return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&playsinline=1`
@@ -138,6 +183,61 @@ export function AdminDashboard({ navigate }: { navigate?: NavigateFunction }) {
       </div>
 
       <div className="admin-dashboard__content">
+        {/* Filters/Roles Section */}
+        <section className="admin-dashboard__section">
+          <h2 className="admin-dashboard__section-title">Filters / Roles</h2>
+          <p className="admin-dashboard__help-text">
+            Manage the filter options that appear in the "My Works" section. These roles can be assigned to projects.
+          </p>
+          
+          <div className="admin-dashboard__field">
+            <label className="admin-dashboard__label">Add New Role</label>
+            <div className="admin-dashboard__add-role">
+              <input
+                type="text"
+                value={newRoleName}
+                onChange={(e) => setNewRoleName(e.target.value)}
+                className="admin-dashboard__input"
+                placeholder="e.g., PRODUCER, WRITER"
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleAddRole()
+                  }
+                }}
+              />
+              <button
+                onClick={handleAddRole}
+                disabled={saving || !newRoleName.trim()}
+                className="admin-dashboard__button admin-dashboard__button--primary"
+              >
+                Add Role
+              </button>
+            </div>
+          </div>
+
+          <div className="admin-dashboard__roles-list">
+            <h3 className="admin-dashboard__subtitle">Existing Roles</h3>
+            {roles.length === 0 ? (
+              <p className="admin-dashboard__empty">No roles defined yet.</p>
+            ) : (
+              <div className="admin-dashboard__roles-grid">
+                {roles.map((role) => (
+                  <div key={role} className="admin-dashboard__role-item">
+                    <span className="admin-dashboard__role-name">{role}</span>
+                    <button
+                      onClick={() => handleDeleteRole(role)}
+                      disabled={saving}
+                      className="admin-dashboard__button admin-dashboard__button--small admin-dashboard__button--delete"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* About Me Image Section */}
         <section className="admin-dashboard__section">
           <h2 className="admin-dashboard__section-title">About Me Image</h2>
@@ -196,6 +296,7 @@ export function AdminDashboard({ navigate }: { navigate?: NavigateFunction }) {
               }}
               saving={saving}
               generateEmbedUrl={generateEmbedUrl}
+              availableRoles={roles}
             />
           )}
 
@@ -267,13 +368,15 @@ function ProjectForm({
   onSave,
   onCancel,
   saving,
-  generateEmbedUrl
+  generateEmbedUrl,
+  availableRoles
 }: {
   project: VideoMeta | null
   onSave: (data: Partial<VideoMeta>) => void
   onCancel: () => void
   saving: boolean
   generateEmbedUrl: (platform: VideoPlatform, videoId: string) => string
+  availableRoles: string[]
 }) {
   const [formData, setFormData] = useState<Partial<VideoMeta>>({
     title: project?.title || '',
@@ -390,18 +493,24 @@ function ProjectForm({
 
       <div className="admin-project-form__field">
         <label className="admin-project-form__label">Roles</label>
-        <div className="admin-project-form__roles">
-          {ROLE_ORDER.map((role) => (
-            <label key={role} className="admin-project-form__role-checkbox">
-              <input
-                type="checkbox"
-                checked={formData.roles?.includes(role) || false}
-                onChange={() => toggleRole(role)}
-              />
-              <span>{role}</span>
-            </label>
-          ))}
-        </div>
+        {availableRoles.length === 0 ? (
+          <p className="admin-project-form__help">
+            No roles available. Please add roles in the "Filters / Roles" section above.
+          </p>
+        ) : (
+          <div className="admin-project-form__roles">
+            {availableRoles.map((role) => (
+              <label key={role} className="admin-project-form__role-checkbox">
+                <input
+                  type="checkbox"
+                  checked={formData.roles?.includes(role as VideoRole) || false}
+                  onChange={() => toggleRole(role as VideoRole)}
+                />
+                <span>{role}</span>
+              </label>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="admin-project-form__actions">

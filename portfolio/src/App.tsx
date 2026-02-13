@@ -3,19 +3,28 @@ import { useEffect, useMemo, useState } from 'react'
 import { VideoGrid } from './components/VideoGrid.tsx'
 import { DitherBackground } from './components/DitherBackground.tsx'
 import { videos, type VideoRole } from './data/videos.ts'
-
-const ROLE_ORDER: VideoRole[] = ['DIRECTOR', 'CINEMATOGRAPHER', 'EDITOR', 'COLORIST', 'SOUNDTRACK']
+import { getRoles } from './services/api.ts'
 
 function App() {
   const aboutMeImage = 'https://pub-76ffd52f8d4541deba0aac1dbba56bf2.r2.dev/2fofo-nova_insta.jpg.jpeg'
+  const [availableRoles, setAvailableRoles] = useState<string[]>([])
+
+  useEffect(() => {
+    // Load roles from admin settings
+    getRoles().then(setAvailableRoles).catch(() => {
+      // Fallback to default roles if loading fails
+      setAvailableRoles(['DIRECTOR', 'CINEMATOGRAPHER', 'EDITOR', 'COLORIST', 'SOUNDTRACK'])
+    })
+  }, [])
 
   const allRoles = useMemo<VideoRole[]>(() => {
     const roleSet = new Set<VideoRole>()
     videos.forEach((video) => {
       video.roles.forEach((role) => roleSet.add(role))
     })
-    return ROLE_ORDER.filter((role) => roleSet.has(role))
-  }, [])
+    // Use available roles from admin, filtered by what's actually used in videos
+    return availableRoles.filter((role) => roleSet.has(role as VideoRole)) as VideoRole[]
+  }, [availableRoles])
   
   const [activeRole, setActiveRole] = useState<VideoRole | 'All'>('All')
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null)

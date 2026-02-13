@@ -867,7 +867,7 @@
   color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-size: clamp(0.65625rem, 1.125vw, 0.75rem);
   font-family: 'Space Grotesk', 'IBM Plex Mono', sans-serif;
   padding: 0;
   cursor: pointer;

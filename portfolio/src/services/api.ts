@@ -121,3 +121,56 @@ export const updateAboutMeImage = async (imageUrl: string): Promise<void> => {
   // })
 }
 
+// Roles/Filters API
+export const getRoles = async (): Promise<string[]> => {
+  const stored = localStorage.getItem('admin_roles')
+  if (stored) {
+    try {
+      return JSON.parse(stored)
+    } catch (e) {
+      // If stored data is invalid, fall back to default
+    }
+  }
+  
+  // Default roles
+  return ['DIRECTOR', 'CINEMATOGRAPHER', 'EDITOR', 'COLORIST', 'SOUNDTRACK']
+}
+
+export const saveRoles = async (roles: string[]): Promise<void> => {
+  localStorage.setItem('admin_roles', JSON.stringify(roles))
+  
+  // In production, replace with: POST /api/roles
+  // await fetch(`${API_BASE_URL}/roles`, {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify(roles)
+  // })
+}
+
+export const addRole = async (role: string): Promise<void> => {
+  const roles = await getRoles()
+  const normalizedRole = role.toUpperCase().trim()
+  
+  if (!normalizedRole) {
+    throw new Error('Role cannot be empty')
+  }
+  
+  if (roles.includes(normalizedRole)) {
+    throw new Error('Role already exists')
+  }
+  
+  roles.push(normalizedRole)
+  await saveRoles(roles)
+}
+
+export const deleteRole = async (role: string): Promise<void> => {
+  const roles = await getRoles()
+  const filtered = roles.filter(r => r !== role)
+  
+  if (filtered.length === roles.length) {
+    throw new Error('Role not found')
+  }
+  
+  await saveRoles(filtered)
+}
+

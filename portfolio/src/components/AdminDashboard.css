@@ -320,6 +320,76 @@
   display: block;
 }
 
+/* Roles/Filters Management */
+.admin-dashboard__help-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.admin-dashboard__add-role {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.admin-dashboard__add-role .admin-dashboard__input {
+  flex: 1;
+}
+
+.admin-dashboard__roles-list {
+  margin-top: 2rem;
+}
+
+.admin-dashboard__subtitle {
+  font-size: 1.1rem;
+  margin: 0 0 1rem 0;
+  font-family: 'Space Grotesk', 'IBM Plex Mono', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.admin-dashboard__empty {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+.admin-dashboard__roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.admin-dashboard__role-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  gap: 1rem;
+}
+
+.admin-dashboard__role-name {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'Space Grotesk', 'IBM Plex Mono', sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex: 1;
+}
+
+.admin-dashboard__button--small {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  align-self: auto;
+}
+
 .admin-project-form__actions {
   display: flex;
   gap: 1rem;
